@@ -1,0 +1,83 @@
+// =========================
+// COLORS
+// =========================
+
+$green-900: #1f4f4c;
+
+$white: #ffffff;
+$grey-100: #eeeeee;
+$grey-300: #c9c9c9;
+
+// Text
+$text-primary: #171717;
+$text-secondary: #666666;
+
+
+// =========================
+// TYPOGRAPHY
+// =========================
+
+$font-primary: "Manrope Variable", sans-serif;
+
+// Font weights
+$font-regular: 400;
+$font-medium: 500;
+$font-semibold: 600;
+$font-bold: 700;
+
+// Font sizes
+$fs-xs: 0.75rem;    // 12px
+$fs-sm: 0.875rem;   // 14px
+$fs-base: 1rem;     // 16px
+$fs-lg: 1.125rem;   // 18px
+$fs-xl: 1.25rem;    // 20px
+$fs-2xl: 1.5rem;    // 24px
+$fs-3xl: 2rem;      // 32px
+
+
+// =========================
+// LAYOUT
+// =========================
+
+$container-max: 1400px;
+
+
+// =========================
+// BREAKPOINTS
+// =========================
+
+$mobile: 767px;
+$tablet: 1024px;
+$desktop: 1280px;
+
+
+// =========================
+// SPACING
+// =========================
+
+$spacing-xs: 4px;
+$spacing-sm: 8px;
+$spacing-md: 16px;
+$spacing-lg: 24px;
+$spacing-xl: 32px;
+$spacing-2xl: 48px;
+$spacing-3xl: 64px;
+
+
+// =========================
+// BORDER RADIUS
+// =========================
+
+$radius-sm: 4px;
+$radius-md: 8px;
+$radius-lg: 12px;
+$radius-xl: 16px;
+
+
+// =========================
+// TRANSITIONS
+// =========================
+
+$transition-fast: 150ms ease;
+$transition-base: 250ms ease;
+$transition-slow: 350ms ease;

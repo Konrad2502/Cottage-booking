@@ -1,0 +1,148 @@
+@use "../../styles/settings" as *;
+
+.navigation {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: $spacing-lg;
+  padding: $spacing-lg $spacing-xl;
+  width: 100%;
+  border-bottom: 1px solid $grey-100;
+  background-color: $grey-100;
+}
+
+// Logo
+
+.navigation__logo {
+  color: $green-900;
+  font-size: $fs-xl;
+  font-weight: $font-bold;
+  letter-spacing: -0.5px;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+// Right side
+
+.navigation__actions {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xl;
+}
+
+.navigation__booking {
+  color: $green-900;
+  font-size: $fs-sm;
+  font-weight: $font-semibold;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color $transition-base, opacity $transition-base;
+}
+
+// Language segmented control
+
+.navigation__languages {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 4px;
+  background-color: $grey-100;
+  border-radius: $radius-md;
+}
+
+.navigation__language {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  min-height: 36px;
+  padding: 6px 10px;
+  border: none;
+  border-radius: $radius-sm;
+  background-color: transparent;
+  color: $green-900;
+  background-color: $white;
+  font-family: inherit;
+  font-size: $fs-sm;
+  font-weight: $font-semibold;
+  cursor: pointer;
+
+  transition:
+    background-color $transition-base,
+    color $transition-base;
+
+  &--active {
+    background-color: $green-900;
+    color: $white;
+  }
+}
+
+// Hover effects
+
+@media (hover: hover) and (pointer: fine) {
+  .navigation__booking:hover {
+    opacity: 0.7;
+  }
+
+  .navigation__logo:hover {
+    opacity: 0.8;
+  }
+
+  .navigation__language:not(.navigation__language--active):hover {
+    background-color: $grey-300;
+  }
+}
+
+// Keyboard accessibility
+
+.navigation__logo:focus-visible,
+.navigation__booking:focus-visible,
+.navigation__language:focus-visible {
+  outline: 2px solid $green-900;
+  outline-offset: 3px;
+}
+
+// Tablet
+
+@media (max-width: $tablet) {
+  .navigation {
+    padding-block: $spacing-md;
+  }
+
+  .navigation__actions {
+    gap: $spacing-lg;
+  }
+}
+
+// Mobile
+
+@media (max-width: $mobile) {
+  .navigation {
+    gap: $spacing-sm;
+  }
+
+  .navigation__logo {
+    font-size: $fs-sm;
+    letter-spacing: -0.3px;
+    white-space: normal;
+  }
+
+  .navigation__actions {
+    gap: $spacing-sm;
+  }
+
+  .navigation__booking {
+    font-size: $fs-xs;
+  }
+
+  .navigation__languages {
+    padding: 3px;
+  }
+
+  .navigation__language {
+    min-width: 36px;
+    min-height: 36px;
+    padding: 5px 7px;
+    font-size: $fs-xs;
+  }
+}

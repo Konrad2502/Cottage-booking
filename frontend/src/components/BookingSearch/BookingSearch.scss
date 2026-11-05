@@ -1,0 +1,78 @@
+@use "../../styles/settings" as *;
+
+.booking-search {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  width: 100%;
+  padding: $spacing-md $spacing-xl;
+  background-color: $green-900;
+}
+
+.booking-search__field {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: $spacing-md;
+
+  flex: 1;
+  min-width: 0;
+  min-height: 52px;
+
+  padding: 0 $spacing-lg;
+
+  background-color: transparent;
+  border: 1px solid rgba($white, 0.3);
+  border-radius: $radius-md;
+
+  color: $white;
+  font-family: inherit;
+  font-size: $fs-sm;
+  font-weight: $font-medium;
+  text-align: left;
+
+  cursor: pointer;
+
+  transition:
+    background-color $transition-base,
+    border-color $transition-base;
+}
+
+.booking-search__text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.booking-search__field svg {
+  flex-shrink: 0;
+}
+
+// Hover
+@media (hover: hover) and (pointer: fine) {
+  .booking-search__field:hover {
+    border-color: rgba($white, 0.7);
+    background-color: rgba($white, 0.05);
+  }
+}
+
+// Keyboard focus
+.booking-search__field:focus-visible {
+  outline: 2px solid $white;
+  outline-offset: 3px;
+}
+
+// Mobile
+@media (max-width: $mobile) {
+  .booking-search {
+    flex-direction: column;
+    align-items: stretch;
+    padding: $spacing-md;
+  }
+
+  .booking-search__field {
+    flex: none;
+    width: 100%;
+    padding-inline: $spacing-md;
+  }
+}
