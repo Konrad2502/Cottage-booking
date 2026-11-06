@@ -1,0 +1,33 @@
+@use "../../styles/settings" as *;
+
+.main-content {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+  gap: $spacing-lg;
+background-color: $grey-100;
+  width: 100%;
+  padding: $spacing-xl;
+  flex: 1;
+}
+
+.main-content__left {
+  min-width: 0;
+}
+
+.main-content__right {
+  min-width: 0;
+}
+
+// Tablet
+@media (max-width: $tablet) {
+  .main-content {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+// Mobile
+@media (max-width: $mobile) {
+  .main-content {
+    padding: $spacing-md;
+  }
+}
