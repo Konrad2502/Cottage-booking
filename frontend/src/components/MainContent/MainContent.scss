@@ -8,10 +8,14 @@ background-color: $grey-100;
   width: 100%;
   padding: $spacing-xl;
   flex: 1;
+  
 }
 
 .main-content__left {
   min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .main-content__right {

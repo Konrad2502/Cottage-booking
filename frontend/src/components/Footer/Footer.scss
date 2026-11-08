@@ -1,0 +1,127 @@
+@use "../../styles/settings" as *;
+
+.footer {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xl;
+
+  width: 100%;
+  padding: $spacing-xl;
+
+  background-color: $green-900;
+  color: $white;
+}
+
+.footer__main {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: $spacing-xl;
+}
+
+.footer__content {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xl;
+  max-width: 480px;
+  min-width: 0;
+}
+
+.footer__about {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+}
+
+.footer__title {
+  font-size: $fs-xl;
+  font-weight: $font-bold;
+  color: $white;
+}
+
+.footer__description {
+  font-size: $fs-sm;
+  line-height: 1.7;
+  color: rgba($white, 0.8);
+}
+
+.footer__navigation {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: $spacing-sm;
+}
+
+.footer__heading {
+  margin-bottom: $spacing-xs;
+  font-size: $fs-base;
+  font-weight: $font-semibold;
+  color: $white;
+}
+
+.footer__link {
+  font-size: $fs-sm;
+  color: rgba($white, 0.8);
+  text-decoration: none;
+
+  transition: color $transition-fast;
+
+  &:hover {
+    color: $white;
+    text-decoration: underline;
+  }
+
+  &:focus-visible {
+    outline: 2px solid $white;
+    outline-offset: 4px;
+  }
+}
+
+.footer__logo {
+  display: block;
+  width: 180px;
+  height: 180px;
+  object-fit: contain;
+  flex-shrink: 0;
+  border-radius: 50%;
+}
+
+.footer__bottom {
+  padding-top: $spacing-lg;
+  border-top: 1px solid rgba($white, 0.25);
+
+  font-size: $fs-xs;
+  color: rgba($white, 0.7);
+  text-align: center;
+}
+
+// Tablet
+@media (max-width: $tablet) {
+  .footer__logo {
+    width: 140px;
+    height: 140px;
+  }
+}
+
+// Mobile
+@media (max-width: $mobile) {
+  .footer {
+    padding: $spacing-lg $spacing-md;
+    gap: $spacing-lg;
+  }
+
+  .footer__main {
+    flex-direction: column-reverse;
+    align-items: flex-start;
+    gap: $spacing-lg;
+  }
+
+  .footer__content {
+    gap: $spacing-lg;
+  }
+
+  .footer__logo {
+    width: 110px;
+    height: 110px;
+  }
+}

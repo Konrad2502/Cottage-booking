@@ -6,12 +6,19 @@
   gap: $spacing-lg;
   width: 100%;
   min-width: 0;
+
+  background-color: $white;
+  border-radius: $radius-lg;
+
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
 }
 
 .welcome-section__header {
   display: flex;
   flex-direction: column;
   gap: $spacing-sm;
+  padding: 10px;
 }
 
 .welcome-section__title {
@@ -30,7 +37,7 @@
 .welcome-section__gallery {
   width: 100%;
   overflow: hidden;
-  border-radius: $radius-lg;
+//   border-radius: $radius-lg;
 }
 
 .welcome-section__image {
@@ -52,6 +59,8 @@
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: $spacing-md;
+  padding: 10px;
+  
 }
 
 .welcome-section__feature {
@@ -66,6 +75,9 @@
 
   background-color: $white;
   border-radius: $radius-md;
+
+   border: 1px solid rgba(0, 0, 0, 0.08);
+box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
 
   color: $green-900;
   font-size: $fs-sm;
