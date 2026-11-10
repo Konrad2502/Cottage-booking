@@ -1,14 +1,51 @@
+
 @use "../../styles/settings" as *;
 
 .booking-search {
+  position: relative;
+
   display: flex;
   align-items: center;
   gap: $spacing-sm;
+
   width: 100%;
   padding: $spacing-md $spacing-xl;
+
   background-color: $green-900;
 }
 
+// Pasek nad przyciemnionym tłem
+.booking-search--open {
+  z-index: 1001;
+}
+
+// Przyciemnienie strony dla obu popupów
+.booking-search__backdrop {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  z-index: 1000;
+
+  background-color: rgba(0, 0, 0, 0.25);
+}
+
+.booking-search__calendar-wrapper,
+.booking-search__guests-wrapper {
+  position: relative;
+  min-width: 0;
+}
+
+.booking-search__calendar-wrapper {
+  flex: 3;
+}
+
+.booking-search__guests-wrapper {
+  flex: 2;
+}
+
+// Przyciski BookingSearch
 .booking-search__field {
   display: flex;
   align-items: center;
@@ -38,6 +75,19 @@
     border-color $transition-base;
 }
 
+// Przyciski mają wypełniać szerokość swoich wrapperów
+.booking-search__calendar-wrapper > .booking-search__field,
+.booking-search__guests-wrapper > .booking-search__field {
+  width: 100%;
+}
+
+// Aktywny przycisk — kalendarz lub goście
+.booking-search__field--active {
+  background-color: $white;
+  color: $text-primary;
+  border-color: $white;
+}
+
 .booking-search__text {
   overflow: hidden;
   text-overflow: ellipsis;
@@ -50,7 +100,7 @@
 
 // Hover
 @media (hover: hover) and (pointer: fine) {
-  .booking-search__field:hover {
+  .booking-search__field:not(.booking-search__field--active):hover {
     border-color: rgba($white, 0.7);
     background-color: rgba($white, 0.05);
   }
@@ -68,6 +118,12 @@
     flex-direction: column;
     align-items: stretch;
     padding: $spacing-md;
+  }
+
+  .booking-search__calendar-wrapper,
+  .booking-search__guests-wrapper {
+    flex: none;
+    width: 100%;
   }
 
   .booking-search__field {
