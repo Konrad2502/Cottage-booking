@@ -1,0 +1,434 @@
+
+@use "../../styles/settings" as *;
+
+// Overlay - przyciemnione tło
+
+.cottage-details__overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1099;
+
+  background-color: rgba(0, 0, 0, 0.55);
+}
+
+// Główne okno modala
+
+.cottage-details {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  z-index: 1100;
+
+  transform: translate(-50%, -50%);
+
+  width: min(1100px, calc(100vw - 32px));
+  max-height: calc(100dvh - 32px);
+
+  background-color: $white;
+  border: 1px solid $grey-100;
+  border-radius: $radius-lg;
+
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.18);
+
+  overflow-y: auto;
+  overscroll-behavior: contain;
+
+  color: $text-primary;
+}
+
+// Przycisk zamykania
+
+.cottage-details__close {
+  position: sticky;
+  top: $spacing-md;
+  z-index: 3;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 42px;
+  height: 42px;
+  margin: $spacing-md $spacing-md (-$spacing-md) auto;
+
+  background-color: $green-900;
+  border: none;
+  border-radius: $radius-md;
+
+  color: $white;
+  cursor: pointer;
+
+  transition: opacity $transition-fast;
+
+  &:hover {
+    opacity: 0.85;
+  }
+
+  &:focus-visible {
+    outline: 2px solid $green-900;
+    outline-offset: 3px;
+  }
+}
+
+// Zawartość
+
+.cottage-details__content {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xl;
+
+  padding: $spacing-xl;
+  min-width: 0;
+}
+
+// Nagłówek
+
+.cottage-details__header {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+
+  padding-right: 48px;
+}
+
+.cottage-details__title {
+  font-size: $fs-3xl;
+  font-weight: $font-bold;
+  color: $text-primary;
+}
+
+.cottage-details__subtitle {
+  font-size: $fs-lg;
+  font-weight: $font-medium;
+  color: $text-secondary;
+}
+
+// Galeria zdjęć
+
+.cottage-details__gallery {
+  position: relative;
+  isolation: isolate;
+
+  width: 100%;
+  aspect-ratio: 16 / 7;
+
+  border-radius: $radius-lg;
+  overflow: hidden;
+
+  clip-path: inset(0 round $radius-lg);
+}
+
+// Wszystkie zdjęcia znajdują się na sobie
+
+.cottage-details__image {
+  position: absolute;
+  inset: 0;
+
+  display: block;
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+  opacity: 0;
+
+  transition: opacity 300ms ease;
+}
+
+// Tylko aktywne zdjęcie jest widoczne
+
+.cottage-details__image--active {
+  opacity: 1;
+}
+
+// Kontener przycisków galerii
+
+.cottage-details__gallery-controls {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+
+  display: flex;
+  overflow: hidden;
+
+  border-top-left-radius: $radius-md;
+  border-bottom-right-radius: $radius-lg;
+}
+
+// Przyciski przewijania zdjęć
+
+.cottage-details__gallery-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 52px;
+  height: 52px;
+
+  background-color: rgba($white, 0.9);
+  border: none;
+  border-right: 1px solid rgba($grey-300, 0.5);
+
+  color: $green-900;
+  cursor: pointer;
+
+  backdrop-filter: blur(6px);
+
+  transition: background-color $transition-fast;
+
+  &:last-child {
+    border-right: none;
+  }
+
+  &:focus-visible {
+    outline: 2px solid $green-900;
+    outline-offset: -3px;
+  }
+}
+
+// Licznik zdjęć
+
+.cottage-details__gallery-counter {
+  position: absolute;
+  left: $spacing-md;
+  bottom: $spacing-md;
+  z-index: 2;
+
+  padding: $spacing-xs $spacing-sm;
+
+  background-color: rgba(0, 0, 0, 0.45);
+  border-radius: $radius-sm;
+
+  color: $white;
+  font-size: $fs-xs;
+  font-weight: $font-medium;
+
+  backdrop-filter: blur(4px);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .cottage-details__gallery-button:hover {
+    background-color: rgba($white, 0.8);
+  }
+}
+
+// Sekcje
+
+.cottage-details__section {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-lg;
+  min-width: 0;
+}
+
+.cottage-details__section-title {
+  font-size: $fs-xl;
+  font-weight: $font-bold;
+  color: $text-primary;
+}
+
+// Podstawowe informacje
+
+.cottage-details__info {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  column-gap: $spacing-md;
+  row-gap: $spacing-xl;
+
+  padding: $spacing-lg;
+
+  background-color: $grey-50;
+  border-radius: $radius-lg;
+}
+
+.cottage-details__info-item {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+
+  min-width: 0;
+
+  font-size: $fs-sm;
+  font-weight: $font-medium;
+  color: $text-primary;
+
+  svg {
+    flex-shrink: 0;
+    color: $green-900;
+  }
+}
+
+// Siatka udogodnień
+
+.cottage-details__amenities {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: $spacing-md;
+
+  padding: $spacing-lg;
+
+  background-color: $grey-50;
+  border-radius: $radius-lg;
+}
+
+.cottage-details__amenity {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-sm;
+
+  min-width: 0;
+  min-height: 124px;
+  padding: $spacing-md $spacing-sm;
+
+  background-color: $white;
+  border: 1px solid $grey-100;
+  border-radius: $radius-md;
+
+  text-align: center;
+
+  transition:
+    box-shadow $transition-fast,
+    border-color $transition-fast;
+}
+
+.cottage-details__amenity-icon {
+  flex-shrink: 0;
+  color: $green-900;
+}
+
+.cottage-details__amenity-label {
+  font-size: $fs-xs;
+  font-weight: $font-medium;
+  line-height: 1.5;
+  color: $text-primary;
+}
+
+.cottage-details__amenity-extra {
+  font-size: 0.625rem;
+  font-weight: $font-semibold;
+  color: $text-secondary;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .cottage-details__amenity:hover {
+    border-color: $grey-300;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.06);
+  }
+}
+
+// Opis
+
+.cottage-details__description {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md;
+
+  font-size: $fs-sm;
+  line-height: 1.8;
+  color: $text-secondary;
+
+  h4 {
+    margin-top: $spacing-sm;
+
+    font-size: $fs-lg;
+    font-weight: $font-bold;
+    line-height: 1.4;
+    color: $green-900;
+  }
+
+  strong {
+    font-weight: $font-semibold;
+    color: $text-primary;
+  }
+}
+
+// Tablet
+
+@media (max-width: $tablet) {
+  .cottage-details__content {
+    padding: $spacing-lg;
+  }
+
+  .cottage-details__title {
+    font-size: $fs-2xl;
+  }
+
+  .cottage-details__gallery {
+    aspect-ratio: 16 / 9;
+  }
+
+  .cottage-details__amenities {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+// Mobile
+
+@media (max-width: $mobile) {
+  .cottage-details {
+    width: calc(100vw - 16px);
+    max-height: calc(100dvh - 16px);
+  }
+
+  .cottage-details__content {
+    padding: $spacing-md;
+    gap: $spacing-lg;
+  }
+
+  .cottage-details__title {
+    font-size: $fs-xl;
+  }
+
+  .cottage-details__subtitle {
+    font-size: $fs-sm;
+  }
+
+  .cottage-details__gallery {
+    aspect-ratio: 4 / 3;
+  }
+
+  .cottage-details__gallery-button {
+    width: 44px;
+    height: 44px;
+  }
+
+  .cottage-details__info {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: $spacing-xl;
+    padding: $spacing-md;
+  }
+
+  .cottage-details__info-item {
+    font-size: $fs-xs;
+  }
+
+  .cottage-details__amenities {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: $spacing-sm;
+    padding: $spacing-sm;
+  }
+
+  .cottage-details__amenity {
+    min-height: 108px;
+  }
+
+  .cottage-details__section-title {
+    font-size: $fs-lg;
+  }
+}
+
+// Dostępność: ograniczenie animacji
+
+@media (prefers-reduced-motion: reduce) {
+  .cottage-details__image {
+    transition: none;
+  }
+
+  .cottage-details__close,
+  .cottage-details__gallery-button,
+  .cottage-details__amenity {
+    transition: none;
+  }
+}

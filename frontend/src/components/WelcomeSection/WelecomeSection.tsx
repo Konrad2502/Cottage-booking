@@ -15,7 +15,7 @@ export default function WelcomeSection() {
 
       <div className="welcome-section__gallery">
         <img
-          src="/images/domki.webp"
+          src="/images/photo-1.jpg"
           alt="Domki Długoszówka"
           className="welcome-section__image"
         />
