@@ -58,8 +58,8 @@ export default function CottageCard({
   const [isDetailsOpen, setIsDetailsOpen] = useState(false);
 
   // Dane testowe — później zastąpimy je danymi z backendu
-  const availableCount = 2;
-  const totalCount = 3;
+  const availableCount: number = 2;
+  const totalCount: number = 3;
 
   return (
     <>
