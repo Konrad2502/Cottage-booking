@@ -1,4 +1,7 @@
+
 @use "../../styles/settings" as *;
+
+// Główny kontener
 
 .booking-summary {
   display: flex;
@@ -10,8 +13,8 @@
 
   background-color: $white;
   border-radius: $radius-lg;
+  border: 1px solid rgba(0, 0, 0, 0.06);
 
-   border: 1px solid rgba(0, 0, 0, 0.06);
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
 }
 
@@ -21,6 +24,8 @@
   color: $text-primary;
 }
 
+// Stan początkowy
+
 .booking-summary__empty {
   display: flex;
   flex-direction: column;
@@ -29,6 +34,7 @@
   gap: $spacing-sm;
 
   padding: $spacing-xl $spacing-md;
+
   background-color: $grey-100;
   border-radius: $radius-md;
 
@@ -50,6 +56,327 @@
   color: $text-secondary;
 }
 
+// Lista domków przed wyborem oferty
+
+.booking-summary__cottages {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md;
+}
+
+.booking-summary__cottage {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+
+  padding: $spacing-md;
+
+  background-color: $grey-50;
+  border-radius: $radius-md;
+}
+
+.booking-summary__cottage-title {
+  font-size: $fs-sm;
+  font-weight: $font-semibold;
+  color: $text-primary;
+}
+
+.booking-summary__guests {
+  font-size: $fs-sm;
+  line-height: 1.5;
+  color: $text-secondary;
+}
+
+// Szczegółowe podsumowanie
+
+.booking-summary__details {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-lg;
+
+  min-width: 0;
+}
+
+// Daty pobytu
+
+.booking-summary__dates {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: $spacing-sm;
+}
+
+.booking-summary__date {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $spacing-xs;
+
+  min-width: 0;
+  padding: $spacing-md $spacing-xs;
+
+  background-color: $grey-50;
+  border-radius: $radius-md;
+
+  text-align: center;
+
+  strong {
+    font-size: $fs-3xl;
+    font-weight: $font-bold;
+    color: $text-primary;
+  }
+
+  span {
+    font-size: $fs-sm;
+    color: $text-primary;
+  }
+
+  small {
+    margin-top: $spacing-md;
+    font-size: $fs-xs;
+    color: $text-secondary;
+  }
+}
+
+// Zdjęcie oferty
+
+.booking-summary__image-wrapper {
+  position: relative;
+
+  width: 100%;
+  aspect-ratio: 4 / 3;
+
+  overflow: hidden;
+  border-radius: $radius-lg;
+}
+
+.booking-summary__image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.booking-summary__image-wrapper::after {
+  content: "";
+  position: absolute;
+  inset: 30% 0 0;
+
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(0, 0, 0, 0.65)
+  );
+}
+
+.booking-summary__image-label {
+  position: absolute;
+  left: $spacing-md;
+  right: $spacing-md;
+  bottom: $spacing-md;
+  z-index: 1;
+
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xs;
+
+  color: $white;
+
+  span {
+    font-size: $fs-xs;
+  }
+
+  strong {
+    font-size: $fs-sm;
+    font-weight: $font-bold;
+  }
+}
+
+// Wybrane domki
+
+.booking-summary__selected-cottages {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md;
+}
+
+.booking-summary__selected-cottage {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+
+  padding: $spacing-md;
+
+  background-color: $white;
+  border: 1px solid $grey-100;
+  border-radius: $radius-md;
+}
+
+.booking-summary__selected-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: $spacing-sm;
+
+  h3 {
+    flex: 1;
+    min-width: 0;
+
+    font-size: $fs-sm;
+    font-weight: $font-semibold;
+    color: $text-primary;
+  }
+
+  strong {
+    flex-shrink: 0;
+
+    font-size: $fs-sm;
+    font-weight: $font-bold;
+    color: $text-primary;
+    white-space: nowrap;
+  }
+}
+
+.booking-summary__item-detail {
+  font-size: $fs-xs;
+  line-height: 1.5;
+  color: $text-secondary;
+}
+
+// Podsumowanie finansowe
+
+.booking-summary__payment {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+
+  padding-top: $spacing-lg;
+  border-top: 1px solid $grey-300;
+}
+
+// Całkowita cena rezerwacji
+
+.booking-summary__total {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: $spacing-md;
+
+  span {
+    font-size: $fs-base;
+    font-weight: $font-semibold;
+    color: $text-primary;
+  }
+
+  strong {
+    font-size: $fs-xl;
+    font-weight: $font-bold;
+    color: $green-900;
+    white-space: nowrap;
+  }
+}
+
+// Przedpłata 30%
+
+.booking-summary__deposit {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: $spacing-md;
+
+  span {
+    font-size: $fs-sm;
+    font-weight: $font-medium;
+    color: $text-secondary;
+  }
+
+  strong {
+    font-size: $fs-base;
+    font-weight: $font-semibold;
+    color: $text-primary;
+    white-space: nowrap;
+  }
+}
+
+// Przycisk Dalej
+
+.booking-summary__next {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-sm;
+
+  width: 100%;
+  min-height: 64px;
+  margin-top: $spacing-lg;
+  padding: $spacing-md $spacing-lg;
+
+  background-color: $green-900;
+  border: none;
+  border-radius: $radius-md;
+
+  color: $white;
+  font: inherit;
+  font-size: $fs-base;
+  font-weight: $font-bold;
+
+  cursor: pointer;
+
+  transition:
+    background-color $transition-fast,
+    transform $transition-fast;
+
+  &:disabled {
+    cursor: not-allowed;
+  }
+
+  &:focus-visible {
+    outline: 2px solid $green-900;
+    outline-offset: 3px;
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .booking-summary__next:not(:disabled):hover {
+    background-color: rgba($green-900, 0.9);
+    transform: translateY(-2px);
+  }
+}
+
+// Przycisk Powrót
+
+.booking-summary__back {
+  align-self: flex-start;
+
+  padding: $spacing-sm $spacing-lg;
+
+  background-color: $white;
+  border: 1px solid $grey-300;
+  border-radius: $radius-md;
+
+  color: $text-primary;
+  font: inherit;
+  font-size: $fs-sm;
+
+  cursor: pointer;
+
+  transition: background-color $transition-fast;
+
+  &:hover {
+    background-color: $grey-50;
+  }
+
+  &:focus-visible {
+    outline: 2px solid $green-900;
+    outline-offset: 2px;
+  }
+}
+
+.booking-summary__terms-warning {
+  color: red;
+}
+
+// Mobile
+
 @media (max-width: $mobile) {
   .booking-summary {
     padding: $spacing-md;
@@ -57,5 +384,33 @@
 
   .booking-summary__empty {
     padding: $spacing-lg $spacing-md;
+  }
+
+  .booking-summary__date {
+    padding: $spacing-md $spacing-xs;
+
+    strong {
+      font-size: $fs-2xl;
+    }
+
+    span {
+      font-size: $fs-xs;
+    }
+  }
+
+  .booking-summary__total {
+    flex-wrap: wrap;
+
+    strong {
+      font-size: $fs-lg;
+    }
+  }
+
+  .booking-summary__deposit {
+    flex-wrap: wrap;
+  }
+
+  .booking-summary__next {
+    min-height: 56px;
   }
 }

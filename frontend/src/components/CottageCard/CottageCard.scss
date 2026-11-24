@@ -1,6 +1,8 @@
 
 @use "../../styles/settings" as *;
 
+// Główna karta domku
+
 .cottage-card {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr);
@@ -15,7 +17,7 @@
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
 }
 
-// Zdjęcie i przycisk Zobacz
+// Zdjęcie
 
 .cottage-card__image-wrapper {
   position: relative;
@@ -30,7 +32,7 @@
   object-fit: cover;
 }
 
-// Przycisk otwierający CottageDetails
+// Przycisk Zobacz
 
 .cottage-card__details-button {
   position: absolute;
@@ -50,7 +52,6 @@
   font-weight: $font-semibold;
 
   cursor: pointer;
-
   backdrop-filter: blur(6px);
 
   transition:
@@ -93,7 +94,7 @@
   color: $text-secondary;
 }
 
-// Informacje i udogodnienia
+// Udogodnienia karty
 
 .cottage-card__amenities {
   display: grid;
@@ -170,8 +171,13 @@
   cursor: pointer;
   transition: opacity $transition-fast;
 
-  &:hover {
+  &:hover:not(:disabled) {
     opacity: 0.85;
+  }
+
+  &:disabled {
+    opacity: 0.7;
+    cursor: default;
   }
 
   &:focus-visible {
@@ -180,13 +186,191 @@
   }
 }
 
-// Hover przycisku Zobacz
+// Dodatki — wewnątrz głównej karty
+
+.cottage-card__extras {
+  grid-column: 1 / -1;
+
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-lg;
+
+  min-width: 0;
+  padding: $spacing-lg;
+
+  background-color: $white;
+  border-top: 1px solid $grey-100;
+
+  animation: extras-slide-in 300ms ease-out;
+}
+
+.cottage-card__extras-title {
+  align-self: flex-start;
+
+  padding: 0 $spacing-sm $spacing-sm;
+  border-bottom: 2px solid $green-900;
+
+  font-size: $fs-base;
+  font-weight: $font-semibold;
+  color: $green-900;
+}
+
+.cottage-card__extras-group {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md;
+}
+
+.cottage-card__extras-group-title {
+  font-size: $fs-base;
+  font-weight: $font-semibold;
+  color: $text-primary;
+}
+
+// Pojedynczy dodatek
+
+.cottage-card__extra {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: $spacing-lg;
+
+  min-height: 92px;
+  padding: $spacing-lg;
+
+  background-color: $grey-50;
+  border: 1px solid $grey-100;
+  border-radius: $radius-md;
+}
+
+.cottage-card__extra-info {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+
+  min-width: 0;
+}
+
+.cottage-card__extra-name {
+  font-size: $fs-sm;
+  font-weight: $font-bold;
+  color: $text-primary;
+}
+
+.cottage-card__extra-description {
+  font-size: $fs-xs;
+  line-height: 1.6;
+  color: $text-secondary;
+}
+
+// Cena i licznik dodatków
+
+.cottage-card__extra-actions {
+  display: flex;
+  align-items: center;
+  gap: $spacing-lg;
+  flex-shrink: 0;
+}
+
+.cottage-card__extra-price {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: $spacing-xs;
+
+  min-width: 90px;
+
+  strong {
+    color: $text-primary;
+    font-size: $fs-sm;
+    font-weight: $font-bold;
+    white-space: nowrap;
+  }
+
+  span {
+    font-size: $fs-xs;
+    color: $text-secondary;
+  }
+}
+
+.cottage-card__counter {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+}
+
+.cottage-card__counter-value {
+  min-width: 20px;
+  text-align: center;
+  font-size: $fs-sm;
+  font-weight: $font-semibold;
+  color: $text-primary;
+}
+
+.cottage-card__counter-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+
+  background-color: $white;
+  border: 1px solid $grey-300;
+  border-radius: $radius-md;
+
+  color: $text-primary;
+  cursor: pointer;
+
+  transition: background-color $transition-fast;
+
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+
+  &:focus-visible {
+    outline: 2px solid $green-900;
+    outline-offset: 2px;
+  }
+}
+
+.cottage-card__counter-button--plus {
+  background-color: $green-900;
+  border-color: $green-900;
+  color: $white;
+}
+
+// Hover
 
 @media (hover: hover) and (pointer: fine) {
   .cottage-card__details-button:hover {
     background-color: $white;
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  .cottage-card__counter-button:not(:disabled):hover {
+    background-color: $grey-100;
+  }
+
+  .cottage-card__counter-button--plus:not(:disabled):hover {
+    background-color: rgba($green-900, 0.85);
+  }
+}
+
+// Animacja pojawiania się dodatków
+
+@keyframes extras-slide-in {
+  from {
+    opacity: 0;
+    transform: translateY(-12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
@@ -231,5 +415,33 @@
     right: $spacing-sm;
     bottom: $spacing-sm;
     padding: $spacing-sm $spacing-md;
+  }
+
+  .cottage-card__extras {
+    padding: $spacing-md;
+  }
+
+  .cottage-card__extra {
+    flex-direction: column;
+    align-items: stretch;
+    padding: $spacing-md;
+    gap: $spacing-md;
+  }
+
+  .cottage-card__extra-actions {
+    justify-content: space-between;
+    gap: $spacing-md;
+  }
+
+  .cottage-card__extra-price {
+    align-items: flex-start;
+  }
+}
+
+// Dostępność — ograniczenie animacji
+
+@media (prefers-reduced-motion: reduce) {
+  .cottage-card__extras {
+    animation: none;
   }
 }

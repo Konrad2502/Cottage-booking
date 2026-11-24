@@ -1,22 +1,33 @@
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
-import { type DateRange } from "@daypicker/react";
+import type { DateRange } from "@daypicker/react";
 import { CalendarDays, ChevronDown } from "lucide-react";
 
 import BookingCalendar from "../BookingCalendar/BookingCalendar";
+
 import GuestSelector, {
   type CottageGuests,
 } from "../GuestSelector/GuestSelector";
 
 import "./BookingSearch.scss";
 
+// Rodzaj otwartego popupu
 type ActivePopup = "calendar" | "guests" | null;
+
+// Props otrzymywane z App.tsx
+type BookingSearchProps = {
+  selectedDates?: DateRange;
+  selectedCottages: CottageGuests[];
+  onConfirmDates: (range: DateRange) => void;
+  onConfirmGuests: (cottages: CottageGuests[]) => void;
+};
 
 const MAX_COTTAGES = 3;
 
 // Dane testowe — później pobierzemy je z backendu.
 const availableCottages = 3;
 
+// Formatowanie daty
 function formatDate(date: Date): string {
   return new Intl.DateTimeFormat("pl-PL", {
     day: "numeric",
@@ -25,17 +36,19 @@ function formatDate(date: Date): string {
   }).format(date);
 }
 
-export default function BookingSearch() {
+export default function BookingSearch({
+  selectedDates,
+  selectedCottages,
+  onConfirmDates,
+  onConfirmGuests,
+}: BookingSearchProps) {
+  // Który popup jest obecnie otwarty?
   const [activePopup, setActivePopup] = useState<ActivePopup>(null);
 
-  const [selectedDates, setSelectedDates] = useState<DateRange>();
-
-  const [selectedCottages, setSelectedCottages] = useState<CottageGuests[]>([
-    { id: 1, adults: 2, children: 0 },
-  ]);
-
+  // Pozycja przyciemnionego tła
   const [backdropTop, setBackdropTop] = useState(0);
 
+  // Referencje do elementów
   const searchRef = useRef<HTMLElement | null>(null);
   const calendarRef = useRef<HTMLDivElement | null>(null);
   const guestsRef = useRef<HTMLDivElement | null>(null);
@@ -43,20 +56,22 @@ export default function BookingSearch() {
   const isCalendarOpen = activePopup === "calendar";
   const isGuestsOpen = activePopup === "guests";
 
-  // Suma dorosłych ze wszystkich wybranych domków
+  // Suma dorosłych ze wszystkich domków
   const totalAdults = selectedCottages.reduce(
     (sum, cottage) => sum + cottage.adults,
     0,
   );
 
-  // Suma dzieci ze wszystkich wybranych domków
+  // Suma dzieci ze wszystkich domków
   const totalChildren = selectedCottages.reduce(
     (sum, cottage) => sum + cottage.children,
     0,
   );
 
+  // Liczba wybranych domków
   const cottageCount = selectedCottages.length;
 
+  // Obsługa popupów
   useEffect(() => {
     if (activePopup === null) return;
 
@@ -97,24 +112,29 @@ export default function BookingSearch() {
 
     return () => {
       window.removeEventListener("resize", updateBackdropPosition);
+
       window.removeEventListener("scroll", updateBackdropPosition);
 
       document.removeEventListener("pointerdown", handleClickOutside);
+
       document.removeEventListener("keydown", handleKeyDown);
     };
   }, [activePopup]);
 
+  // Otwieranie i zamykanie popupu
   function handleTogglePopup(popup: Exclude<ActivePopup, null>) {
     setActivePopup((previous) => (previous === popup ? null : popup));
   }
 
+  // Zatwierdzenie wybranych dat
   function handleConfirmDates(range: DateRange) {
-    setSelectedDates(range);
+    onConfirmDates(range);
     setActivePopup(null);
   }
 
+  // Zatwierdzenie wybranych gości
   function handleConfirmGuests(cottages: CottageGuests[]) {
-    setSelectedCottages(cottages);
+    onConfirmGuests(cottages);
     setActivePopup(null);
   }
 
